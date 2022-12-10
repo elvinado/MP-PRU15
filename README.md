@@ -25,11 +25,12 @@ Web scraping is an essential skill for a data professional. An understanding of 
 4. Selenium
 5. Matplotlib
 
-## Notebook 1: Visualisation of MPs' Relationship Based on Mentions in News <a name = "notebook-2"></a>
+## Notebook 2: Visualisation of MPs' Relationship Based on Mentions in News <a name = "notebook-2"></a>
 
 A visualisation of MPs' relationships based on mentions in news articles could take the form of a network diagram, showing each MP as a node and lines connecting them representing mentions of one MP in an article about another. This would allow users to see which MPs have strong connections and which are more isolated. Overall, the visualisation would provide a useful way to understand the relationships between MPs based on news coverage.
 
 [Jupyter Notebook](MPs_news_relationships.ipynb)
+[Medium Artickle](https://medium.com/@elvinado/visualisation-of-mps-relationship-based-on-mentions-in-news-using-python-ee62abbbd851)
 
 ### Prerequisites
 
