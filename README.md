@@ -14,8 +14,8 @@ The primary objective of this project is to show methods of handling messy real-
 
 Web scraping is an essential skill for a data professional. An understanding of the data and its context are imperative in order to extract “correct” information. Without domain knowledge, we may pass the wrong and misleading information to the next analyst. They might use it to build whatever narrative based on their agenda. However, our task is to collect the most accurate data. Here, I present the method to extract election results from a news website article.
 
-[Jupyter Notebook](MPs_pru15_names.ipynb)
-[Medium Article](https://medium.com/@elvinado/web-scraping-election-results-of-pru-15-ge-15-using-python-e9310129bf9e)
+- [Jupyter Notebook](MPs_pru15_names.ipynb)
+- [Medium Article](https://medium.com/@elvinado/web-scraping-election-results-of-pru-15-ge-15-using-python-e9310129bf9e)
 
 ### Prerequisites
 
@@ -29,8 +29,8 @@ Web scraping is an essential skill for a data professional. An understanding of 
 
 A visualisation of MPs' relationships based on mentions in news articles could take the form of a network diagram, showing each MP as a node and lines connecting them representing mentions of one MP in an article about another. This would allow users to see which MPs have strong connections and which are more isolated. Overall, the visualisation would provide a useful way to understand the relationships between MPs based on news coverage.
 
-[Jupyter Notebook](MPs_news_relationships.ipynb)
-[Medium Artickle](https://medium.com/@elvinado/visualisation-of-mps-relationship-based-on-mentions-in-news-using-python-ee62abbbd851)
+- [Jupyter Notebook](MPs_news_relationships.ipynb)
+- [Medium Artickle](https://medium.com/@elvinado/visualisation-of-mps-relationship-based-on-mentions-in-news-using-python-ee62abbbd851)
 
 ### Prerequisites
 
