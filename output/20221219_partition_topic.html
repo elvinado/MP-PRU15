@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 1200px;
+                 height: 800px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"font": {"color": "white"}, "group": 0, "id": "tourism", "label": "tourism", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 1, "id": "LCS scandal", "label": "LCS scandal", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 1, "id": "football world cup", "label": "football world cup", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 0, "id": "healtcare", "label": "healtcare", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 1, "id": "prime minister", "label": "prime minister", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 1, "id": "court cases", "label": "court cases", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 0, "id": "Islamic", "label": "Islamic", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 0, "id": "consumer price", "label": "consumer price", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 1, "id": "election", "label": "election", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 0, "id": "COVID-19", "label": "COVID-19", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 1, "id": "PAS", "label": "PAS", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 0, "id": "foreign policy", "label": "foreign policy", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 1, "id": "UPKO", "label": "UPKO", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 0, "id": "education", "label": "education", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 1, "id": "MA63", "label": "MA63", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 0, "id": "PKR", "label": "PKR", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 1, "id": "Kuala Lumpur", "label": "Kuala Lumpur", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 1, "id": "official duty", "label": "official duty", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "group": 1, "id": "anti-hopping bill", "label": "anti-hopping bill", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"from": "tourism", "to": "LCS scandal", "width": 1}, {"from": "tourism", "to": "football world cup", "width": 1}, {"from": "tourism", "to": "healtcare", "width": 1}, {"from": "tourism", "to": "prime minister", "width": 1}, {"from": "tourism", "to": "court cases", "width": 1}, {"from": "tourism", "to": "Islamic", "width": 1}, {"from": "tourism", "to": "consumer price", "width": 1}, {"from": "tourism", "to": "election", "width": 1}, {"from": "tourism", "to": "COVID-19", "width": 1}, {"from": "tourism", "to": "PAS", "width": 1}, {"from": "tourism", "to": "foreign policy", "width": 1}, {"from": "tourism", "to": "UPKO", "width": 1}, {"from": "tourism", "to": "education", "width": 1}, {"from": "tourism", "to": "MA63", "width": 1}, {"from": "tourism", "to": "PKR", "width": 1}, {"from": "tourism", "to": "Kuala Lumpur", "width": 1}, {"from": "tourism", "to": "official duty", "width": 1}, {"from": "tourism", "to": "anti-hopping bill", "width": 1}, {"from": "prime minister", "to": "LCS scandal", "width": 1}, {"from": "prime minister", "to": "football world cup", "width": 1}, {"from": "prime minister", "to": "healtcare", "width": 1}, {"from": "prime minister", "to": "court cases", "width": 1}, {"from": "prime minister", "to": "Islamic", "width": 1}, {"from": "prime minister", "to": "consumer price", "width": 1}, {"from": "prime minister", "to": "election", "width": 1}, {"from": "prime minister", "to": "COVID-19", "width": 1}, {"from": "prime minister", "to": "foreign policy", "width": 1}, {"from": "prime minister", "to": "PAS", "width": 1}, {"from": "prime minister", "to": "UPKO", "width": 1}, {"from": "prime minister", "to": "education", "width": 1}, {"from": "prime minister", "to": "MA63", "width": 1}, {"from": "prime minister", "to": "PKR", "width": 1}, {"from": "prime minister", "to": "Kuala Lumpur", "width": 1}, {"from": "prime minister", "to": "official duty", "width": 1}, {"from": "prime minister", "to": "anti-hopping bill", "width": 1}, {"from": "court cases", "to": "LCS scandal", "width": 1}, {"from": "court cases", "to": "football world cup", "width": 1}, {"from": "court cases", "to": "healtcare", "width": 1}, {"from": "court cases", "to": "Islamic", "width": 1}, {"from": "court cases", "to": "consumer price", "width": 1}, {"from": "court cases", "to": "election", "width": 1}, {"from": "court cases", "to": "COVID-19", "width": 1}, {"from": "court cases", "to": "PAS", "width": 1}, {"from": "court cases", "to": "foreign policy", "width": 1}, {"from": "court cases", "to": "UPKO", "width": 1}, {"from": "court cases", "to": "education", "width": 1}, {"from": "court cases", "to": "MA63", "width": 1}, {"from": "court cases", "to": "PKR", "width": 1}, {"from": "court cases", "to": "Kuala Lumpur", "width": 1}, {"from": "court cases", "to": "official duty", "width": 1}, {"from": "court cases", "to": "anti-hopping bill", "width": 1}, {"from": "election", "to": "LCS scandal", "width": 1}, {"from": "election", "to": "football world cup", "width": 1}, {"from": "election", "to": "healtcare", "width": 1}, {"from": "election", "to": "Islamic", "width": 1}, {"from": "election", "to": "consumer price", "width": 1}, {"from": "election", "to": "COVID-19", "width": 1}, {"from": "election", "to": "foreign policy", "width": 1}, {"from": "election", "to": "PAS", "width": 1}, {"from": "election", "to": "UPKO", "width": 1}, {"from": "election", "to": "education", "width": 1}, {"from": "election", "to": "MA63", "width": 1}, {"from": "election", "to": "PKR", "width": 1}, {"from": "election", "to": "Kuala Lumpur", "width": 1}, {"from": "election", "to": "official duty", "width": 1}, {"from": "election", "to": "anti-hopping bill", "width": 1}, {"from": "PAS", "to": "football world cup", "width": 1}, {"from": "PAS", "to": "Islamic", "width": 1}, {"from": "PAS", "to": "consumer price", "width": 1}, {"from": "PAS", "to": "COVID-19", "width": 1}, {"from": "PAS", "to": "foreign policy", "width": 1}, {"from": "PAS", "to": "UPKO", "width": 1}, {"from": "PAS", "to": "education", "width": 1}, {"from": "PAS", "to": "MA63", "width": 1}, {"from": "PAS", "to": "PKR", "width": 1}, {"from": "PAS", "to": "Kuala Lumpur", "width": 1}, {"from": "PAS", "to": "LCS scandal", "width": 1}, {"from": "PAS", "to": "official duty", "width": 1}, {"from": "PAS", "to": "anti-hopping bill", "width": 1}, {"from": "foreign policy", "to": "LCS scandal", "width": 1}, {"from": "foreign policy", "to": "football world cup", "width": 1}, {"from": "foreign policy", "to": "healtcare", "width": 1}, {"from": "foreign policy", "to": "Islamic", "width": 1}, {"from": "foreign policy", "to": "consumer price", "width": 1}, {"from": "foreign policy", "to": "COVID-19", "width": 1}, {"from": "foreign policy", "to": "UPKO", "width": 1}, {"from": "foreign policy", "to": "education", "width": 1}, {"from": "foreign policy", "to": "MA63", "width": 1}, {"from": "foreign policy", "to": "PKR", "width": 1}, {"from": "foreign policy", "to": "Kuala Lumpur", "width": 1}, {"from": "foreign policy", "to": "official duty", "width": 1}, {"from": "foreign policy", "to": "anti-hopping bill", "width": 1}, {"from": "UPKO", "to": "Islamic", "width": 1}, {"from": "UPKO", "to": "COVID-19", "width": 1}, {"from": "UPKO", "to": "PKR", "width": 1}, {"from": "UPKO", "to": "education", "width": 1}, {"from": "UPKO", "to": "MA63", "width": 1}, {"from": "UPKO", "to": "healtcare", "width": 1}, {"from": "UPKO", "to": "Kuala Lumpur", "width": 1}, {"from": "UPKO", "to": "official duty", "width": 1}, {"from": "UPKO", "to": "anti-hopping bill", "width": 1}, {"from": "education", "to": "LCS scandal", "width": 1}, {"from": "education", "to": "football world cup", "width": 1}, {"from": "education", "to": "healtcare", "width": 1}, {"from": "education", "to": "Islamic", "width": 1}, {"from": "education", "to": "consumer price", "width": 1}, {"from": "education", "to": "COVID-19", "width": 1}, {"from": "education", "to": "MA63", "width": 1}, {"from": "education", "to": "PKR", "width": 1}, {"from": "education", "to": "Kuala Lumpur", "width": 1}, {"from": "education", "to": "official duty", "width": 1}, {"from": "education", "to": "anti-hopping bill", "width": 1}, {"from": "MA63", "to": "LCS scandal", "width": 1}, {"from": "MA63", "to": "football world cup", "width": 1}, {"from": "MA63", "to": "healtcare", "width": 1}, {"from": "MA63", "to": "Islamic", "width": 1}, {"from": "MA63", "to": "consumer price", "width": 1}, {"from": "MA63", "to": "COVID-19", "width": 1}, {"from": "MA63", "to": "PKR", "width": 1}, {"from": "MA63", "to": "Kuala Lumpur", "width": 1}, {"from": "MA63", "to": "official duty", "width": 1}, {"from": "MA63", "to": "anti-hopping bill", "width": 1}, {"from": "PKR", "to": "LCS scandal", "width": 1}, {"from": "PKR", "to": "football world cup", "width": 1}, {"from": "PKR", "to": "healtcare", "width": 1}, {"from": "PKR", "to": "Islamic", "width": 1}, {"from": "PKR", "to": "consumer price", "width": 1}, {"from": "PKR", "to": "COVID-19", "width": 1}, {"from": "PKR", "to": "Kuala Lumpur", "width": 1}, {"from": "PKR", "to": "official duty", "width": 1}, {"from": "PKR", "to": "anti-hopping bill", "width": 1}, {"from": "Kuala Lumpur", "to": "LCS scandal", "width": 1}, {"from": "Kuala Lumpur", "to": "football world cup", "width": 1}, {"from": "Kuala Lumpur", "to": "healtcare", "width": 1}, {"from": "Kuala Lumpur", "to": "Islamic", "width": 1}, {"from": "Kuala Lumpur", "to": "consumer price", "width": 1}, {"from": "Kuala Lumpur", "to": "COVID-19", "width": 1}, {"from": "Kuala Lumpur", "to": "official duty", "width": 1}, {"from": "Kuala Lumpur", "to": "anti-hopping bill", "width": 1}, {"from": "football world cup", "to": "LCS scandal", "width": 1}, {"from": "football world cup", "to": "Islamic", "width": 1}, {"from": "football world cup", "to": "consumer price", "width": 1}, {"from": "football world cup", "to": "COVID-19", "width": 1}, {"from": "football world cup", "to": "healtcare", "width": 1}, {"from": "football world cup", "to": "official duty", "width": 1}, {"from": "football world cup", "to": "anti-hopping bill", "width": 1}, {"from": "Islamic", "to": "LCS scandal", "width": 1}, {"from": "Islamic", "to": "healtcare", "width": 1}, {"from": "Islamic", "to": "consumer price", "width": 1}, {"from": "Islamic", "to": "COVID-19", "width": 1}, {"from": "Islamic", "to": "official duty", "width": 1}, {"from": "Islamic", "to": "anti-hopping bill", "width": 1}, {"from": "consumer price", "to": "COVID-19", "width": 1}, {"from": "consumer price", "to": "healtcare", "width": 1}, {"from": "consumer price", "to": "LCS scandal", "width": 1}, {"from": "consumer price", "to": "official duty", "width": 1}, {"from": "consumer price", "to": "anti-hopping bill", "width": 1}, {"from": "COVID-19", "to": "LCS scandal", "width": 1}, {"from": "COVID-19", "to": "healtcare", "width": 1}, {"from": "COVID-19", "to": "official duty", "width": 1}, {"from": "COVID-19", "to": "anti-hopping bill", "width": 1}, {"from": "healtcare", "to": "LCS scandal", "width": 1}, {"from": "healtcare", "to": "anti-hopping bill", "width": 1}, {"from": "LCS scandal", "to": "official duty", "width": 1}, {"from": "LCS scandal", "to": "anti-hopping bill", "width": 1}, {"from": "official duty", "to": "anti-hopping bill", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "repulsion": {
+            "centralGravity": 0.2,
+            "damping": 0.09,
+            "nodeDistance": 300,
+            "springConstant": 0.05,
+            "springLength": 100
+        },
+        "solver": "repulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
